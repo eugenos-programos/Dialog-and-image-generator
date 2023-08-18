@@ -57,4 +57,5 @@ for prof_level in words.keys():
         gd_file.Upload()
 
         gd_file = None
+        print(f"Image for {word} is saved")
         

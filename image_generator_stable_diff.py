@@ -5,12 +5,13 @@ import io
 from PIL import Image
 import os
 
-API_URL = "https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4"
-headers = {"Authorization": f"Bearer {os.env.get("HUGG_KEY"}"}
+API_URL = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1"
+hugg_key = os.environ.get("HUGG_KEY")
+headers = {"Authorization": f"Bearer {hugg_key}"}
 
 def get_predictions(word) -> io.BytesIO:
-	response = requests.post(API_URL, headers=headers, json={"inputs": word})
-	return io.BytesIO(response.content)
+    response = requests.post(API_URL, headers=headers, json={"inputs": word}, stream=True)
+    return io.BytesIO(response.content)
 
 
 parser = argparse.ArgumentParser(
